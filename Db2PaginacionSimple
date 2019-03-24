@@ -1,0 +1,8 @@
+SELECT * FROM ( 
+  SELECT 
+    ROW_NUMBER() OVER (ORDER BY cliid ASC) AS numero,
+	cliid AS cliente,
+	cliabv AS nombre
+  FROM pclien 
+) AS z 
+WHERE numero BETWEEN 500 and 1500;
