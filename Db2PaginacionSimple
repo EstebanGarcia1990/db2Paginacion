@@ -1,8 +1,18 @@
 SELECT * FROM ( 
   SELECT 
-    ROW_NUMBER() OVER (ORDER BY cliid ASC) AS numero,
-	cliid AS cliente,
-	cliabv AS nombre
-  FROM pclien 
+    ROW_NUMBER() OVER (ORDER BY clienteID ASC) AS numero,
+	clienteId AS cliente,
+	clienteNombre AS nombre
+  FROM Clientes 
 ) AS z 
 WHERE numero BETWEEN 500 and 1500;
+
+
+
+SELECT * FROM(
+	 SELECT 
+		CAST(((CAST(ROW_NUMBER() OVER (ORDER BY clienteId ASC) as DECIMAL(12,2))/50)-0.001) + 1 as DECIMAL(12,0)) as pagina,
+		clienteId AS cliente,
+		clienteNombre AS nombre
+	 from clientes 
+   ) z where pagina = 1;
